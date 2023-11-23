@@ -1,7 +1,9 @@
+import 'package:go_router_responsive/routing/route_parameters.dart';
+
 enum Routes {
   home(name: 'home', path: '/'),
-  articleList(name: 'articleList', path: 'articleList'),
-  articleDetails(name: 'articleDetails', path: 'articleDetails'),
+  articleList(name: 'articleList1', path: 'articleList'),
+  articleDetails(name: 'articleDetails', path: ':aid'),
   userList(name: 'userList', path: 'userList'),
   userDetail(name: 'userDetail', path: 'userDetail');
 

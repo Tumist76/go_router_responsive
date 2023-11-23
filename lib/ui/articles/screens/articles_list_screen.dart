@@ -2,17 +2,18 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:go_router_responsive/pages/route_arguments.dart';
+import 'package:go_router_responsive/ui/common/routing/route_arguments.dart';
 import 'package:go_router_responsive/routing/route_parameters.dart';
 import 'package:go_router_responsive/routing/routes.dart';
 
-class ArticlesListPageArguments extends RouteArguments {
+class ArticlesListScreenArguments extends RouteArguments {
   final Map<int, String>? items;
   final int? selectedItemId;
 
-  const ArticlesListPageArguments({this.items, this.selectedItemId});
+  const ArticlesListScreenArguments({this.items, this.selectedItemId});
 
-  factory ArticlesListPageArguments.fromRoute({required GoRouterState state}) {
+  factory ArticlesListScreenArguments.fromRoute(
+      {required GoRouterState state}) {
     Map<int, String>? items;
     int? selectedItemId;
     if (state.extra is Map<int, String>) {
@@ -23,33 +24,33 @@ class ArticlesListPageArguments extends RouteArguments {
     if (state.pathParameters.containsKey(articleParamName)) {
       selectedItemId = int.tryParse(state.pathParameters[articleParamName]!);
     }
-    return ArticlesListPageArguments(
+    return ArticlesListScreenArguments(
       items: items,
       selectedItemId: selectedItemId,
     );
   }
 }
 
-class ArticlesListPage extends StatefulWidget {
+class ArticlesListScreen extends StatefulWidget {
   final Map<int, String>? items;
   final int? selectedItemId;
 
-  const ArticlesListPage({super.key, this.items, this.selectedItemId});
+  const ArticlesListScreen({super.key, this.items, this.selectedItemId});
 
-  factory ArticlesListPage.fromRoute({required GoRouterState state}) {
+  factory ArticlesListScreen.fromRoute({required GoRouterState state}) {
     print('${state.fullPath}, extra: ${state.extra}');
-    final arguments = ArticlesListPageArguments.fromRoute(state: state);
-    return ArticlesListPage(
+    final arguments = ArticlesListScreenArguments.fromRoute(state: state);
+    return ArticlesListScreen(
       items: arguments.items,
       selectedItemId: arguments.selectedItemId,
     );
   }
 
   @override
-  State<ArticlesListPage> createState() => _ArticlesListPageState();
+  State<ArticlesListScreen> createState() => _ArticlesListScreenState();
 }
 
-class _ArticlesListPageState extends State<ArticlesListPage> {
+class _ArticlesListScreenState extends State<ArticlesListScreen> {
   Map<int, String>? items;
   int? selectedItemId;
 
@@ -67,7 +68,7 @@ class _ArticlesListPageState extends State<ArticlesListPage> {
   }
 
   @override
-  void didUpdateWidget(covariant ArticlesListPage oldWidget) {
+  void didUpdateWidget(covariant ArticlesListScreen oldWidget) {
     if (widget.selectedItemId != oldWidget.selectedItemId) {
       selectedItemId = widget.selectedItemId;
     }
