@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router_responsive/ui/common/detail_placeholder_widget.dart';
 
-class ArticlesEmptySelectionScreen extends StatelessWidget {
-  const ArticlesEmptySelectionScreen({super.key});
+class ArticleEmptySelectionScreen extends StatelessWidget {
+  const ArticleEmptySelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

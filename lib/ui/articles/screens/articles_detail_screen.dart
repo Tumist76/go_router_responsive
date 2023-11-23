@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:go_router_responsive/ui/common/routing/route_arguments.dart';
 import 'package:go_router_responsive/routing/route_parameters.dart';
 import 'package:go_router_responsive/util/reponsive_utility.dart';
 
-class ArticlesDetailScreenRouteArguments extends RouteArguments {
+class ArticlesDetailScreenRouteArguments {
   final int id;
 
   ArticlesDetailScreenRouteArguments({required this.id});
@@ -13,7 +12,7 @@ class ArticlesDetailScreenRouteArguments extends RouteArguments {
     required GoRouterState state,
   }) {
     int? id;
-    final articleParamName = RouteParameters.articleId.parameterName;
+    const articleParamName = RouteParameters.articleId;
     if (state.pathParameters.containsKey(articleParamName)) {
       id = int.tryParse(state.pathParameters[articleParamName]!);
     }
@@ -24,23 +23,19 @@ class ArticlesDetailScreenRouteArguments extends RouteArguments {
   }
 }
 
-class ArticlesDetailScreen extends StatefulWidget {
-  final int id;
-  const ArticlesDetailScreen({super.key, required this.id});
-
+class ArticlesDetailScreen extends StatelessWidget {
   factory ArticlesDetailScreen.fromRoute({
     required GoRouterState state,
   }) {
-    final arguments =
-        ArticlesDetailScreenRouteArguments.fromRoute(state: state);
+    final arguments = ArticlesDetailScreenRouteArguments.fromRoute(
+      state: state,
+    );
     return ArticlesDetailScreen(id: arguments.id);
   }
 
-  @override
-  State<ArticlesDetailScreen> createState() => _ArticlesDetailScreenState();
-}
+  final int id;
+  const ArticlesDetailScreen({super.key, required this.id});
 
-class _ArticlesDetailScreenState extends State<ArticlesDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final isTwoPane = ResponsiveUtility.isBiggerThanMobile(context);
@@ -49,7 +44,7 @@ class _ArticlesDetailScreenState extends State<ArticlesDetailScreen> {
         title: const Text('Articles Detail'),
         leading: isTwoPane ? const CloseButton() : const BackButton(),
       ),
-      body: Center(child: Text('Articles Detail Page, id: ${widget.id + 1}')),
+      body: Center(child: Text('Articles Detail Page, id: ${id + 1}')),
     );
   }
 }

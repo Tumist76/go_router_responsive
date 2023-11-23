@@ -1,7 +1,3 @@
-enum RouteParameters {
-  articleId(parameterName: 'aid');
-
-  final String parameterName;
-
-  const RouteParameters({required this.parameterName});
+class RouteParameters {
+  static const articleId = 'aid';
 }
