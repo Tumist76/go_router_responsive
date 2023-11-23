@@ -1,16 +1,26 @@
 # go_router_responsive
 
-A new Flutter project.
+Демонстрация адаптивного интерфейса с навигацией
 
-## Getting Started
+Состоит из следующих экранов:
+- начальный экран (`/`)
+- главный экран с таб-баром. Таб бар отображается снизу или слева в зависимости от ширины окна.
+    - список статей (`/articleList`). В зависимости от ширины окна отображается либо как обычный экран, либо как двухпанельный с разделением master-detail.
+        - экран статьи (`/articleList/${id}`). В зависимости от ширины окна отображается либо как обычный экран, либо справа от списка от списка статей.
+    - список пользователей (`/userList`). Содержимое экрана расширяется максимум до 600px.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Как работает
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Навбар
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Принцип работы взят из статьи [Flutter Bottom Navigation Bar with Stateful Nested Routes using GoRouter](https://codewithandrea.com/articles/flutter-bottom-navigation-bar-nested-routes-gorouter/), лучше посмотреть первоисточник :)
+
+### Двухпанельное отображение
+
+За основу взят [ShellRoute](https://pub.dev/documentation/go_router/latest/go_router/ShellRoute-class.html). Реализация схожа с тем, как работает навбар, только вместо индексов табов, во вложенный роут будут отправляться разные экраны, отвечающие за отображение `detail`.
+
+Для динамического отображения сделан отдельный виджет `MasterDetailView`, который с помощью `Stack` имеет два варианта отображения:
+- в "широком" варианте делится на две панели;
+- в "узком" варианте отображает одну панель над другой.
+
